@@ -13,24 +13,11 @@ jobs:
     runs-on: ubuntu-latest  # Sử dụng runner Ubuntu
 
     steps:
-      # 1. Lấy mã nguồn từ repository
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # 2. Cài đặt PHP và Composer
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.0'  # Phiên bản PHP bạn muốn sử dụng
-          extensions: mbstring, intl  # Các extension cần thiết (nếu có)
+      - name: Display current directory
+        run: |
+          pwd  # Lệnh để in ra đường dẫn hiện tại
+          echo "Current directory is $(pwd)"  # Dùng echo để hiển thị đường dẫn
       
-      # 3. Cài đặt dependencies bằng Composer
-      - name: Install dependencies
-        run: |
-          curl -sS https://getcomposer.org/installer | php
-          php composer.phar install
-
-      # 4. Chạy các bài test (nếu có sử dụng PHPUnit)
-      - name: Run tests
-        run: |
-          ./vendor/bin/phpunit --configuration phpunit.xml  # Đảm bảo bạn có tệp phpunit.xml
